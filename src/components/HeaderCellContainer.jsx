@@ -83,6 +83,15 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                 } ${column.className}`.trim();
         }
 
+        const isFirstRowCell = index === 0;
+        const isLastRowCell = idex === visibleColumns.length -1
+
+        if (isFirstRowCell) {
+            classNames += ' rgt-cell-row-first'
+        } else if (isLastRowCell) {
+            classNames += ' rgt-cell-row-last'
+        }
+
         return (
             classNames.trim() +
             " " +
@@ -114,6 +123,7 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
     additionalProps = getAdditionalProps();
 
     let headerCellProps = { tableManager, column };
+
 
     return (
         <div
