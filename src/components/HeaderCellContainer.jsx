@@ -26,6 +26,7 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
             icons: {
                 sortAscending: sortAscendingIcon,
                 sortDescending: sortDescendingIcon,
+                sortIcon: sortIcon,
             },
         },
         sortApi: { sort, toggleSort },
@@ -138,12 +139,9 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                                 {<DragHandle />}
                             </SortableDragHandle>
                         ) : null}
-                        {column.id === "checkbox"
-                            ? column.headerCellRenderer({
-                                  ...headerCellProps,
-                                  ...selectionProps,
-                              })
-                            : column.headerCellRenderer(headerCellProps)}
+                        {sort.colId !== column.id && column.sortable && (
+                            <span className="rgt-sort-icon">{sortIcon}</span>
+                        )}
                         {sort.colId !== column.id ? null : sort.isAsc ? (
                             <span className="rgt-sort-icon rgt-sort-icon-ascending">
                                 {sortAscendingIcon}
@@ -153,6 +151,12 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                                 {sortDescendingIcon}
                             </span>
                         )}
+                        {column.id === "checkbox"
+                            ? column.headerCellRenderer({
+                                  ...headerCellProps,
+                                  ...selectionProps,
+                              })
+                            : column.headerCellRenderer(headerCellProps)}
                     </SortableElementItem>
                     {column.resizable ? (
                         <span
