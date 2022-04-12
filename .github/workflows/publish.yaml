@@ -28,4 +28,4 @@ jobs:
           npm set "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}"
           yarn install
           yarn build
-          npm publish --dry-run
+          npm publish
