@@ -21,7 +21,7 @@ const useRowVirtualizer = (props, tableManager) => {
                 ? totalRows - (totalPages - 1) * pageSize
                 : pageSize
             : totalRows,
-        overscan: 20,
+        overscan: 10,
         parentRef: isVirtualScroll ? tableRef : {},
         ...rowVirtualizerProps,
     };
