@@ -63,7 +63,9 @@ const CellContainer = ({
         }
 
         const isFirstRowCell = colIndex === 0;
-        const isLastRowCell = colIndex === visibleColumns.length -1
+        const isLastRowCell = column.pinned
+            ? colIndex === visibleColumns.length - 1
+            : colIndex === visibleColumns.length - 2
 
         if (isFirstRowCell) {
             classNames += ' rgt-cell-row-first'
