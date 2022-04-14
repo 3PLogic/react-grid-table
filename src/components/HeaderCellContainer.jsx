@@ -26,6 +26,7 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
             icons: {
                 sortAscending: sortAscendingIcon,
                 sortDescending: sortDescendingIcon,
+                sortIcon: sortIcon,
             },
         },
         sortApi: { sort, toggleSort },
@@ -82,6 +83,17 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                 } ${column.className}`.trim();
         }
 
+        const isFirstRowCell = index === 0;
+        const isLastRowCell = column.pinned
+            ? index === visibleColumns.length - 1
+            : index === visibleColumns.length - 2
+
+        if (isFirstRowCell) {
+            classNames += ' rgt-cell-row-first'
+        } else if (isLastRowCell) {
+            classNames += ' rgt-cell-row-last'
+        }
+
         return (
             classNames.trim() +
             " " +
@@ -114,6 +126,7 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
 
     let headerCellProps = { tableManager, column };
 
+
     return (
         <div
             data-column-id={column.id.toString()}
@@ -138,12 +151,9 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                                 {<DragHandle />}
                             </SortableDragHandle>
                         ) : null}
-                        {column.id === "checkbox"
-                            ? column.headerCellRenderer({
-                                  ...headerCellProps,
-                                  ...selectionProps,
-                              })
-                            : column.headerCellRenderer(headerCellProps)}
+                        {sort.colId !== column.id && column.sortable && (
+                            <span className="rgt-sort-icon">{sortIcon}</span>
+                        )}
                         {sort.colId !== column.id ? null : sort.isAsc ? (
                             <span className="rgt-sort-icon rgt-sort-icon-ascending">
                                 {sortAscendingIcon}
@@ -153,6 +163,12 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
                                 {sortDescendingIcon}
                             </span>
                         )}
+                        {column.id === "checkbox"
+                            ? column.headerCellRenderer({
+                                  ...headerCellProps,
+                                  ...selectionProps,
+                              })
+                            : column.headerCellRenderer(headerCellProps)}
                     </SortableElementItem>
                     {column.resizable ? (
                         <span

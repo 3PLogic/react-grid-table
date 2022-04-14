@@ -62,6 +62,17 @@ const CellContainer = ({
                 classNames = `${all} rgt-cell-${column.field} ${virtualDefault} ${checkboxDefault}`;
         }
 
+        const isFirstRowCell = colIndex === 0;
+        const isLastRowCell = column.pinned
+            ? colIndex === visibleColumns.length - 1
+            : colIndex === visibleColumns.length - 2
+
+        if (isFirstRowCell) {
+            classNames += ' rgt-cell-row-first'
+        } else if (isLastRowCell) {
+            classNames += ' rgt-cell-row-last'
+        }
+
         return classNames;
     };
 
