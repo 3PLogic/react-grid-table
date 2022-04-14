@@ -84,7 +84,7 @@ const HeaderCellContainer = ({ index, column, tableManager }) => {
         }
 
         const isFirstRowCell = index === 0;
-        const isLastRowCell = idex === visibleColumns.length -1
+        const isLastRowCell = index === visibleColumns.length -1
 
         if (isFirstRowCell) {
             classNames += ' rgt-cell-row-first'
