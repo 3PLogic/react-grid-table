@@ -4,7 +4,6 @@
     "description": "A modular table, based on a CSS grid layout, optimized for customization.",
     "author": "Nadav Shaar",
     "license": "MIT",
-    "private": true,
     "repository": "3PLogic/react-grid-table",
     "homepage": "https://nadavshaar.github.io/react-grid-table/",
     "contributors": [
