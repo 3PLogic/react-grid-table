@@ -3,6 +3,9 @@ import { useState, useMemo, useRef } from "react";
 const useColumns = (props, tableManager) => {
     const {
         config: {
+            additionalProps: {
+                virtualColWidth
+            },
             components: {
                 Cell,
                 EditorCell,
@@ -105,7 +108,7 @@ const useColumns = (props, tableManager) => {
         visibleColumns.splice(virtualColIndex, 0, {
             id: "virtual",
             visible: true,
-            width: "auto",
+            width: virtualColWidth || 'auto',
         });
 
         return visibleColumns;
